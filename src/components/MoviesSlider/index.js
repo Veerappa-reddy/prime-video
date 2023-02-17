@@ -1,53 +1,46 @@
-// import Slider from 'react-slick'
+import Slider from 'react-slick'
 
-// const MoviesSlider = props => {
-//   const settings = {
-//     className: 'center',
-//     infinite: true,
-//     centerPadding: '60px',
-//     slidesToShow: 5,
-//     swipeToSlide: true,
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-//     // afterChange: function (index) {
-//     //   console.log(
-//     //     `Slider Changed to: ${index + 1}, background: #222; color: #bada55`,
-//     //   )
-//     // },
-//   }
-//   return (
-//     <div>
-//       <h2>Swipe To Slide</h2>
-//       <Slider {...settings}>
-//         <div>
-//           <h3>1</h3>
-//         </div>
-//         <div>
-//           <h3>2</h3>
-//         </div>
-//         <div>
-//           <h3>3</h3>
-//         </div>
-//         <div>
-//           <h3>4</h3>
-//         </div>
-//         <div>
-//           <h3>5</h3>
-//         </div>
-//         <div>
-//           <h3>6</h3>
-//         </div>
-//         <div>
-//           <h3>7</h3>
-//         </div>
-//         <div>
-//           <h3>8</h3>
-//         </div>
-//         <div>
-//           <h3>9</h3>
-//         </div>
-//       </Slider>
-//     </div>
-//   )
-// }
+import MovieItem from '../MovieItem'
+import './index.css'
 
-// export default MoviesSlider
+const MoviesSlider = props => {
+  const {moviesList} = props
+
+  const actionMovies = moviesList.filter(
+    eachMovie => eachMovie.categoryId === 'ACTION',
+  )
+
+  const comedyMovies = moviesList.filter(
+    eachMovie => eachMovie.categoryId === 'COMEDY',
+  )
+  console.log(comedyMovies)
+
+  const settings = {
+    className: 'center',
+    infinite: true,
+    centerPadding: '60px',
+    slidesToShow: 4,
+    swipeToSlide: true,
+  }
+  return (
+    <div className="movies-container">
+      <h2 className="movies-category-heading">Action Movies</h2>
+      <Slider {...settings}>
+        {actionMovies.map(eachMovieItem => (
+          <MovieItem MovieItemDeatails={eachMovieItem} />
+        ))}
+      </Slider>
+      <h2 className="movies-category-heading">Comedy Movies</h2>
+      <Slider {...settings}>
+        {comedyMovies.map(eachMovieItem => (
+          <MovieItem MovieItemDeatails={eachMovieItem} />
+        ))}
+      </Slider>
+    </div>
+  )
+}
+
+export default MoviesSlider
